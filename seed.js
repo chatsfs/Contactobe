@@ -2,8 +2,7 @@
 
 const Contact=require('./models/contact');
 const config = require('./config')
-const defaultData = {
-  contacts: [
+const contacts= [
     {
       id: 'ryan',
       name: 'Ryan Florence',
@@ -23,4 +22,15 @@ const defaultData = {
       avatarURL: config.origin + '/tyler.jpg'
     }
   ]
-}
+
+  contacts.map(contact=>{
+      Contact.find({'id':contact.id},(err,contacts)=>{
+          if(!err&&!contacts.length){
+              Contact.create({id:contact.id,
+                name:contact.name,
+                email:contact.email,
+                avatarURL:contact.avatarURL
+              });
+          };
+      })
+  })

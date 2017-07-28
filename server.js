@@ -4,6 +4,7 @@ const cors = require('cors')
 const config = require('./config')
 const contacts = require('./contacts')
 require('./database')
+require('./seed.js')
 const app = express()
 
 app.use(express.static('public'))

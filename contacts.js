@@ -1,6 +1,6 @@
 const clone = require('clone')
 const config = require('./config')
-const Contact=require('./models/contact')
+const Contact = require('./models/contact')
 
 const db = {}
 
@@ -30,10 +30,17 @@ const defaultData = {
 const get = (token) => {
   let data = db[token]
 
-  if (data == null) {
-    data = db[token] = clone(defaultData)
-  }
+  Contact.find({}, (err, contacts) => {
+    console.log(err);
+    console.log(!err);
+    console.log(contacts);
+    if (err) {
+      return console.log(err);
+    }
+    data = clone(contacts)
+  });
 
+  console.log(data);
   return data
 }
 
